@@ -12,6 +12,7 @@ import { VirtualTerminal } from './components/VirtualTerminal';
 import { CppCodeViewer } from './components/CppCodeViewer';
 import { TheorySection } from './components/TheorySection';
 import { StudentNotesView } from './components/StudentNotesView';
+import { DeployGuideModal } from './components/DeployGuideModal';
 import {
   FileText,
   Type,
@@ -21,13 +22,15 @@ import {
   BookOpen,
   GraduationCap,
   Sparkles,
-  Award
+  Award,
+  AlertTriangle
 } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('files');
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
   const [isDark, setIsDark] = useState<boolean>(true);
+  const [showDeployGuide, setShowDeployGuide] = useState<boolean>(false);
 
   // Synchronized state for Tabula Recta inspection
   const [inspectState, setInspectState] = useState<{
@@ -129,6 +132,15 @@ export default function App() {
             >
               <Code className="w-4 h-4" />
               <span>{isAr ? 'تحميل كود المشروع الكامل' : 'C++ Source Code'}</span>
+            </button>
+
+            <button
+              onClick={() => setShowDeployGuide(true)}
+              className="px-4 py-2 text-xs font-semibold rounded-lg flex items-center gap-2 transition-all bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30"
+              title={isAr ? 'اضغط هنا إذا ظهرت لك شاشة بيضاء بعد رفع index.html' : 'Click here if index.html shows blank screen after deploy'}
+            >
+              <AlertTriangle className="w-4 h-4 text-amber-400" />
+              <span>{isAr ? 'حل مشكلة عرض index.html' : 'Fix index.html Deploy'}</span>
             </button>
           </div>
         </div>
@@ -273,11 +285,24 @@ export default function App() {
             >
               {isAr ? 'كود C++ الكامل' : 'C++ Code'}
             </button>
+            <button
+              onClick={() => setShowDeployGuide(true)}
+              className="text-amber-400 hover:text-amber-300 transition-colors"
+            >
+              {isAr ? 'دليل رفع index.html' : 'Deploy Guide'}
+            </button>
             <span>·</span>
             <span>Educational Use</span>
           </div>
         </div>
       </footer>
+
+      {/* Deployment & Blank Screen Troubleshooting Modal */}
+      <DeployGuideModal
+        isOpen={showDeployGuide}
+        onClose={() => setShowDeployGuide(false)}
+        lang={lang}
+      />
     </div>
   );
 }
