@@ -1,0 +1,6 @@
+{
+  "name": "Vigenère Cipher C++ Studio",
+  "description": "برنامج واستوديو متكامل لتشفير وفك تشفير الملفات والنصوص بخوارزمية فيجينري بلغة C++ مع مصفوفة تفاعلية ومحاكي وأكواد كاملة.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
